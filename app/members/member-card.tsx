@@ -11,23 +11,26 @@ import {
 } from "@mui/material";
 import { red } from "@mui/material/colors";
 import { useRouter } from "next/navigation";
+import { User } from "@/app/types/types";
 
-export default function MemberCard() {
+export default function MemberCard({ user }: { user: User }) {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push("/members/1");
+    router.push(`/members/${user.id}`);
   };
 
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            Y
-          </Avatar>
+          <Avatar
+            sx={{ bgcolor: red[500] }}
+            aria-label="recipe"
+            src={user.photoUrl}
+          />
         }
-        title="Member Name"
+        title={user.name}
       />
       <CardContent>
         <Chip label="Chip Filled" />

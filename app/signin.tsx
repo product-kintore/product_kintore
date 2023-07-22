@@ -8,7 +8,7 @@ export default function Signin() {
     >
       <Typography>You are not signed in.</Typography>
       <a
-        href={`https://slack.com/openid/connect/authorize?scope=openid%20email%20profile&amp;response_type=code&amp;redirect_uri=${process.env.NEXT_PUBLIC_SLACK_REDIRECT_URL}&amp;client_id=${process.env.NEXT_PUBLIC_SLACK_CLIENT_ID}`}
+        href={process.env.NEXT_PUBLIC_SLACK_OAUTH_URL}
         style={{
           backgroundColor: "#fff",
           alignItems: "center",

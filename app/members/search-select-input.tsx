@@ -11,7 +11,7 @@ import { useState } from "react";
 type Props = {
   menuItems: string[];
   label: string;
-}
+};
 
 export default function SearchSelectInput({ props }: { props: Props }) {
   const [, setSelectedItem] = useState<string>("");

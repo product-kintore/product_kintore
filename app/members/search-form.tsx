@@ -13,23 +13,23 @@ const roleMenuItems = [
   "Other",
 ];
 
-const pmExperienceSelectInputLabel = "PM歴"
+const pmExperienceSelectInputLabel = "PM歴";
 // TODO: fix type
 const pmExperienceMenuItems = [
   "PM経験無し",
   "PMなりたて(1年未満)",
   "PM歴1~5年",
   "PM歴5~10年",
-]
+];
 
-const activitySelectInputLabel = "興味ある活動"
+const activitySelectInputLabel = "興味ある活動";
 // TODO: fix type
 const activityMenuItems = [
   "輪読会",
   "図書館LT",
   "飲み会/交流",
   "Shuffle Tea Time",
-]
+];
 
 export default function SearchForm() {
   return (
