@@ -23,7 +23,7 @@ export default function Myprofile() {
   return data && (
     <Stack spacing={2} margin={8} >
       <ProfileContainer user={data} isEditable={true} />
-      <ActivityContainer />
+      <ActivityContainer user={data} />
     </Stack>
   );
 }

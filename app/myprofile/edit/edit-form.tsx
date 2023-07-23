@@ -1,8 +1,12 @@
 import Select from "react-select"
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
-import { Box, Button, FormControl, Paper, TextField, FormControlLabel, FormGroup, Typography, Checkbox } from "@mui/material"
+import { Box, Button, FormControl, Paper, TextField, FormControlLabel, FormGroup, Typography, Checkbox, Alert, Snackbar } from "@mui/material"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
+import { updateUser } from "@/app/lib/firebase"
+import { useContext, useState } from "react"
+import { UserContext } from "@/app/contexts/user-context"
+import { useRouter } from "next/navigation"
 
 const schema = z.object({
   company: z.string(),
@@ -31,6 +35,27 @@ const interestedActivitiesOptions = [
 ]
 
 export default function EditForm() {
+  const userContext = useContext(UserContext)
+  const docId = userContext?.user?.uid || ""
+  const router = useRouter();
+
+  const [open, setOpen] = useState(false);
+  const [openError, setOpenError] = useState(false);
+
+  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const handleErrorClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenError(false);
+  };
+
   const { control, handleSubmit, formState: { errors } } = useForm<Schema>({
     defaultValues: {
       company: "",
@@ -49,8 +74,15 @@ export default function EditForm() {
     resolver: zodResolver(schema),
   })
 
-  const onSubmit: SubmitHandler<Schema> = (data) => {
+  const onSubmit: SubmitHandler<Schema> = async (data) => {
     console.log(data)
+    try {
+      await updateUser(docId, data)
+      setOpen(true);
+      router.back();
+    } catch (e) {
+      setOpenError(true);
+    }
   }
 
   return (
@@ -98,6 +130,7 @@ export default function EditForm() {
                 {...field}
                 error={!!errors.experiencePeriod}
                 required
+                onChange={(e) => field.onChange(parseInt(e.target.value, 10))}
               />
             )}
           />
@@ -197,6 +230,16 @@ export default function EditForm() {
           </Button>
         </Box>
       </form>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          プロフィールを更新しました！
+        </Alert>
+      </Snackbar>
+      <Snackbar open={openError} autoHideDuration={6000} onClose={handleErrorClose}>
+        <Alert onClose={handleErrorClose} severity="error" sx={{ width: '100%' }}>
+          プロフィールの更新に失敗しました
+        </Alert>
+      </Snackbar>
     </Paper>
   )
 }

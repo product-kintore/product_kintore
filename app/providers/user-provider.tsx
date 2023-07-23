@@ -8,7 +8,7 @@ import {
   signInWithCustomToken,
   User,
 } from "firebase/auth";
-import { initialiFirebaseApp, setDocumentWhenSignin } from "@/app/lib/firebase";
+import { initialiFirebaseApp, upsertUserWhenSignin } from "@/app/lib/firebase";
 import { UserContext } from "@/app/contexts/user-context";
 import Progress from "@/app/components/progress";
 
@@ -41,7 +41,7 @@ export default function UserProvider({
           window.location.href.replace(window.location.search, ""),
         );
         await signInWithCustomToken(auth, token);
-        await setDocumentWhenSignin(uid, { id: uid, name, email, photoUrl });
+        await upsertUserWhenSignin(uid, { id: uid, name, email, photoUrl });
       }
 
       onAuthStateChanged(auth, (user) => {

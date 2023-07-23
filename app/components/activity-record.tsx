@@ -1,25 +1,24 @@
 import { Paper, Typography } from "@mui/material";
 
-// TODO: implement props
-export default function ActivityRecord() {
+// FIXME: do not use any
+export default function ActivityRecord({ activity }: { activity: any }) {
+  console.log(activity);
   return (
     <Paper elevation={1} sx={{ margin: 3 }}>
       <Typography variant="body1" marginTop={2} marginLeft={2} marginRight={2}>
-        活動タイトル :
+        活動タイトル : {activity.title}
       </Typography>
       <Typography variant="body1" marginTop={1} marginLeft={2} marginRight={2}>
-        活動日 :
+        活動日 : {activity.date.toDate().toLocaleDateString()}
       </Typography>
       <Typography
-        variant="body2"
+        variant="body1"
         color="text.primary"
         marginTop={2}
         marginLeft={2}
         marginRight={2}
       >
-        This impressive paella is a perfect party dish and a fun meal to cook
-        together with your guests. Add 1 cup of frozen peas along with the
-        mussels, if you like.
+        {activity.description}
       </Typography>
     </Paper>
   );
