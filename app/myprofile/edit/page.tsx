@@ -3,15 +3,15 @@
 import UserProvider from "@/app/providers/user-provider";
 import AppbarContainer from "@/app/containers/appbar-container";
 import MainContentContainer from "@/app/containers/main-content-container";
-import MemeberDetail from "./member-detail";
+import EditForm from "./edit-form";
 
-export default function Page({ params }: { params: { slug: string } }) {
+export default function Page() {
   return (
     <UserProvider
       appbarChildren={<AppbarContainer />}
       mainChildren={
         <MainContentContainer>
-          <MemeberDetail slug={params.slug} />
+          <EditForm />
         </MainContentContainer>
       }
     />
