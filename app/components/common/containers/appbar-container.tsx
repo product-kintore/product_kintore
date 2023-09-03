@@ -1,8 +1,10 @@
 "use client";
 
 import { useContext } from "react";
-import AuthenticatedAppbar from "@/app/components/authenticated-appbar";
-import Appbar from "@/app/components/appbar";
+import {
+  AuthenticatedAppbar,
+  Appbar,
+} from "@/app/components/common/presentations";
 import { useRouter } from "next/navigation";
 import { Group, Book, AccountBox } from "@mui/icons-material";
 import { UserContext } from "@/app/contexts/user-context";
@@ -11,13 +13,12 @@ const drawerLinkList = [
   {
     text: "自己紹介一覧",
     icon: <Group />,
-    href: "/members",
+    href: "/users",
   },
   {
-    text: "活動記録",
+    text: "メンバーの活動記録",
     icon: <Book />,
-    // TODO: fixed href
-    href: "/myprofile",
+    href: "/activities",
   },
   {
     text: "マイプロフィール",
@@ -34,15 +35,20 @@ export default function AppbarContainer() {
     router.push(href);
   };
 
+  const handleTitleClick = () => {
+    router.push("/");
+  };
+
   return (
     <div style={{ display: "flex" }}>
       {userContext?.user ? (
         <AuthenticatedAppbar
           linkList={drawerLinkList}
-          handleClick={(href) => handleDrawerMenuClick(href)}
+          handleDrawerMenuClick={(href) => handleDrawerMenuClick(href)}
+          handleTitleClick={handleTitleClick}
         />
       ) : (
-        <Appbar />
+        <Appbar handleClick={handleTitleClick} />
       )}
     </div>
   );

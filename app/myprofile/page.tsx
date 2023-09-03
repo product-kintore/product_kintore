@@ -1,9 +1,11 @@
 "use client";
 
-import Myprofile from "@/app/myprofile/myprofile";
+import Profile from "@/app/myprofile/profile";
 import UserProvider from "@/app/providers/user-provider";
-import AppbarContainer from "@/app/containers/appbar-container";
-import MainContentContainer from "@/app/containers/main-content-container";
+import {
+  AppbarContainer,
+  MainContentContainer,
+} from "@/app/components/common/containers";
 
 export default function Page() {
   return (
@@ -11,7 +13,7 @@ export default function Page() {
       appbarChildren={<AppbarContainer />}
       mainChildren={
         <MainContentContainer>
-          <Myprofile />
+          <Profile />
         </MainContentContainer>
       }
     />

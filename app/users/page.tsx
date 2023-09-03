@@ -1,11 +1,11 @@
 "use client";
 
-import Top from "./top";
 import UserProvider from "@/app/providers/user-provider";
 import {
   AppbarContainer,
   MainContentContainer,
 } from "@/app/components/common/containers";
+import MemberList from "./user-list";
 
 export default function Page() {
   return (
@@ -13,7 +13,7 @@ export default function Page() {
       appbarChildren={<AppbarContainer />}
       mainChildren={
         <MainContentContainer>
-          <Top />
+          <MemberList />
         </MainContentContainer>
       }
     />

@@ -1,18 +1,17 @@
 import { Paper, Typography, Grid, Button, Avatar } from "@mui/material";
-// import ProfileList from "@/app/components/profile-list";
-// import { User } from "@/app/types/types";
-import EditIcon from '@mui/icons-material/Edit';
-import { useRouter } from "next/navigation";
-import Preferences from "@/app/components/preferences";
+import EditIcon from "@mui/icons-material/Edit";
+import { User } from "@/app/types/types";
+import ProfileAttributeList from "./profile-attribute-list";
 
-// FIXME: do not use any
-export default function ProfileContainer({ user, isEditable }: { user: any, isEditable: boolean }) {
-  const router = useRouter();
+export type Props = {
+  user: User;
+  isEditable: boolean;
+  handleClick?: () => void;
+};
 
-  const handleClick = () => {
-    router.push(`/myprofile/edit`);
-  };
-  // console.log(user);
+export default function ProfileDetail(props: Props) {
+  const { user, isEditable, handleClick } = props;
+
   return (
     <Paper elevation={1}>
       <Grid container spacing={2}>
@@ -41,11 +40,11 @@ export default function ProfileContainer({ user, isEditable }: { user: any, isEd
         </Grid>
         <Grid item xs={3}>
           <Typography variant="body2" marginTop={3}>
-            更新日時:
+            更新日: {user.updatedAt.toDate().toLocaleDateString()}
           </Typography>
         </Grid>
       </Grid>
-      <Preferences user={user} />
+      <ProfileAttributeList user={user} />
     </Paper>
   );
 }

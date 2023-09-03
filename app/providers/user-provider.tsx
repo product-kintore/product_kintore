@@ -10,7 +10,7 @@ import {
 } from "firebase/auth";
 import { initialiFirebaseApp, upsertUserWhenSignin } from "@/app/lib/firebase";
 import { UserContext } from "@/app/contexts/user-context";
-import Progress from "@/app/components/progress";
+import { Progress } from "@/app/components/common/presentations";
 
 initialiFirebaseApp();
 

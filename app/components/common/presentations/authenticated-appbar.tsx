@@ -1,7 +1,6 @@
 import {
   AppBar,
   Toolbar,
-  Typography,
   IconButton,
   Drawer,
   Box,
@@ -10,20 +9,22 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Link,
 } from "@mui/material";
 import { Menu } from "@mui/icons-material";
 import { useState } from "react";
 
 type Props = {
   linkList: { text: string; icon: JSX.Element; href: string }[];
-  handleClick: (href: string) => void;
+  handleDrawerMenuClick: (href: string) => void;
+  handleTitleClick: () => void;
 };
 
 export default function AuthenticatedAppbar(props: Props) {
   const [drawerState, setDrawerState] = useState(false);
 
   const handleDrawerMenuClick = (href: string) => {
-    props.handleClick(href);
+    props.handleDrawerMenuClick(href);
     setDrawerState(false);
   };
 
@@ -56,9 +57,14 @@ export default function AuthenticatedAppbar(props: Props) {
           >
             <Menu />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Link
+            component="button"
+            variant="h6"
+            onClick={props.handleTitleClick}
+            sx={{ flexGrow: 1, color: "white", textAlign: "inherit" }}
+          >
             Title
-          </Typography>
+          </Link>
         </Toolbar>
       </AppBar>
       <Drawer
