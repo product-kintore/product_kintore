@@ -1,24 +1,51 @@
-import { Paper, Stack, Typography } from "@mui/material";
-import ActivityRecord from "@/app/components/activity-record";
-import ProfileHeader from "@/app/components/profile-header";
-import ProfileList from "@/app/components/profile-list";
-import { User } from "@/app/types/types";
+import { Paper, Typography, Grid, Button, Avatar } from "@mui/material";
+// import ProfileList from "@/app/components/profile-list";
+// import { User } from "@/app/types/types";
+import EditIcon from '@mui/icons-material/Edit';
+import { useRouter } from "next/navigation";
+import Preferences from "@/app/components/preferences";
 
-export default function ProfileContainer({ user }: { user: User }) {
+// FIXME: do not use any
+export default function ProfileContainer({ user, isEditable }: { user: any, isEditable: boolean }) {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/myprofile/edit`);
+  };
+  // console.log(user);
   return (
-    <Stack spacing={2} margin={8}>
-      <Paper elevation={1}>
-        <ProfileHeader user={user} />
-        <ProfileList />
-      </Paper>
-      <Paper elevation={1}>
-        <Typography variant="h6" component="div" marginTop={3} marginLeft={3}>
-          活動記録
-        </Typography>
-        <Stack spacing={2}>
-          <ActivityRecord />
-        </Stack>
-      </Paper>
-    </Stack>
+    <Paper elevation={1}>
+      <Grid container spacing={2}>
+        {isEditable && (
+          <Grid item xs={12} textAlign={"right"}>
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{ marginTop: 3, marginRight: 3 }}
+              onClick={handleClick}
+            >
+              <EditIcon />
+            </Button>
+          </Grid>
+        )}
+        <Grid item xs={4}>
+          <Avatar
+            sx={{ width: 80, height: 80, marginLeft: 3, marginTop: 3 }}
+            src={user.photoUrl}
+          />
+        </Grid>
+        <Grid item xs={5}>
+          <Typography variant="h6" marginTop={5} component={"div"}>
+            {user.name}
+          </Typography>
+        </Grid>
+        <Grid item xs={3}>
+          <Typography variant="body2" marginTop={3}>
+            更新日時:
+          </Typography>
+        </Grid>
+      </Grid>
+      <Preferences user={user} />
+    </Paper>
   );
 }
