@@ -1,36 +1,19 @@
 "use client";
 
-import { Paper, Grid } from "@mui/material";
-import MemberCard from "./member-card";
-import Container from "../containers/container";
-import SearchForm from "./search-form";
+import UserProvider from "@/app/providers/user-provider";
+import AppbarContainer from "@/app/containers/appbar-container";
+import MainContentContainer from "@/app/containers/main-content-container";
+import MemberList from "./member-list";
 
 export default function Page() {
   return (
-    <Container>
-      <Paper sx={{ margin: (theme) => theme.spacing(8) }} elevation={0}>
-        <SearchForm />
-        <Grid container spacing={2}>
-          <Grid item xs={3}>
-            <MemberCard />
-          </Grid>
-          <Grid item xs={3}>
-            <MemberCard />
-          </Grid>
-          <Grid item xs={3}>
-            <MemberCard />
-          </Grid>
-          <Grid item xs={3}>
-            <MemberCard />
-          </Grid>
-          <Grid item xs={3}>
-            <MemberCard />
-          </Grid>
-          <Grid item xs={3}>
-            <MemberCard />
-          </Grid>
-        </Grid>
-      </Paper>
-    </Container>
+    <UserProvider
+      appbarChildren={<AppbarContainer />}
+      mainChildren={
+        <MainContentContainer>
+          <MemberList />
+        </MainContentContainer>
+      }
+    />
   );
 }

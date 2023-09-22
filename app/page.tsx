@@ -1,12 +1,19 @@
 "use client";
 
 import Top from "./top";
-import Container from "./containers/container";
+import UserProvider from "@/app/providers/user-provider";
+import AppbarContainer from "@/app/containers/appbar-container";
+import MainContentContainer from "@/app/containers/main-content-container";
 
 export default function Page() {
   return (
-    <Container>
-      <Top />
-    </Container>
+    <UserProvider
+      appbarChildren={<AppbarContainer />}
+      mainChildren={
+        <MainContentContainer>
+          <Top />
+        </MainContentContainer>
+      }
+    />
   );
 }
