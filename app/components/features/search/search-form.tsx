@@ -86,7 +86,7 @@ export default function SearchForm(props: Props) {
           <SearchTextInput
             label="PM歴(~年以下)"
             type="number"
-            searchParamsLabel="experiencePeriodSince"
+            searchParamsLabel="experiencePeriodTill"
             searchParams={searchParams}
             setSearchParams={setSearchParams}
           />

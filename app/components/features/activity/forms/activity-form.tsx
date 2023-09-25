@@ -42,7 +42,7 @@ export default function ActivityForm(props: Props) {
           render={({ field }) => (
             <TextField
               label={"参加したイベント名"}
-              placeholder="PM"
+              placeholder="INSPIRED輪読会"
               {...field}
               error={!!errors.title}
               required
