@@ -1,9 +1,11 @@
 "use client";
 
 import UserProvider from "@/app/providers/user-provider";
-import AppbarContainer from "@/app/containers/appbar-container";
-import MainContentContainer from "@/app/containers/main-content-container";
-import MemeberDetail from "./member-detail";
+import {
+  AppbarContainer,
+  MainContentContainer,
+} from "@/app/components/common/containers";
+import MemeberDetail from "./user-detail";
 
 export default function Page({ params }: { params: { slug: string } }) {
   return (

@@ -1,9 +1,11 @@
 "use client";
 
 import UserProvider from "@/app/providers/user-provider";
-import AppbarContainer from "@/app/containers/appbar-container";
-import MainContentContainer from "@/app/containers/main-content-container";
-import MemberList from "./member-list";
+import {
+  AppbarContainer,
+  MainContentContainer,
+} from "@/app/components/common/containers";
+import Activities from "@/app/activities/activities";
 
 export default function Page() {
   return (
@@ -11,7 +13,7 @@ export default function Page() {
       appbarChildren={<AppbarContainer />}
       mainChildren={
         <MainContentContainer>
-          <MemberList />
+          <Activities />
         </MainContentContainer>
       }
     />
