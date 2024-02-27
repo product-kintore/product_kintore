@@ -22,8 +22,7 @@ NEXT_PUBLIC_FIREBASE_MESSENGER_SENDER_ID=
 NEXT_PUBLIC_FIREBASE_APP_ID=
 NEXT_PUBLIC_MEASUREMENT_ID=
 
-NEXT_PUBLIC_SLACK_CLIENT_ID=
-NEXT_PUBLIC_SLACK_REDIRECT_URL=
+NEXT_PUBLIC_SLACK_OAUTH_URL=
 
 ```
 
@@ -36,3 +35,12 @@ yarn dev
 Open [http://localhost:3000](http://localhost:3000)
 
 
+## build and deploy
+
+```
+## build
+yarn build
+
+## deploy
+firebase deploy --only hosting
+```

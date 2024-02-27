@@ -1,0 +1,34 @@
+{
+  "hosting": {
+    "public": "out",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html",
+        "dynamicRoutes": [
+          {
+            "page": "/myprofile/activities/[slug]/edit",
+            "regex": "^/myprofile/activities/([^/]+?)/edit(?:/)?$",
+            "routeKeys": {
+              "nxtPslug": "nxtPslug"
+            },
+            "namedRegex": "^/myprofile/activities/(?<nxtPslug>[^/]+?)/edit(?:/)?$"
+          },
+          {
+            "page": "/users/[slug]",
+            "regex": "^/users/([^/]+?)(?:/)?$",
+            "routeKeys": {
+              "nxtPslug": "nxtPslug"
+            },
+            "namedRegex": "^/users/(?<nxtPslug>[^/]+?)(?:/)?$"
+          }
+        ]
+      }
+    ]
+  }
+}
