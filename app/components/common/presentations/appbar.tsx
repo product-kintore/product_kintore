@@ -15,7 +15,6 @@ export default function Appbar(props: Props) {
           onClick={handleClick}
           sx={{ flexGrow: 1, color: "white", textAlign: "inherit" }}
         >
-          Title
         </Link>
       </Toolbar>
     </AppBar>
