@@ -6,10 +6,15 @@ import {
   Appbar,
 } from "@/app/components/common/presentations";
 import { useRouter } from "next/navigation";
-import { Group, Book, AccountBox } from "@mui/icons-material";
+import { Home, Group, Book, AccountBox } from "@mui/icons-material";
 import { UserContext } from "@/app/contexts/user-context";
 
 const drawerLinkList = [
+  {
+    text: "メインページ",
+    icon: <Home />,
+    href: "/",
+  },
   {
     text: "自己紹介一覧",
     icon: <Group />,
