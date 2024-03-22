@@ -13,11 +13,8 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "@/app/types/types";
 import { UserSchema, UserParams } from "@/app/types/schema";
-
-// FIXME: add options
-const interestedActivitiesOptions = [
-  { value: "readingInTurns", label: "輪読会" },
-];
+import { roleOptions } from "@/app/constants/roles";
+import { activityOptions } from "@/app/constants/activities";
 
 type Props = {
   user: User;
@@ -64,10 +61,21 @@ export default function ProfileForm(props: Props) {
           name="role"
           control={control}
           render={({ field }) => (
-            <TextField
-              label={"所属企業でのロール"}
-              placeholder="PM"
+            <Select
               {...field}
+              options={roleOptions}
+              value={field.value ? roleOptions.find((option) => option.value === field.value) : null}
+              placeholder="所属企業でのロール"
+              isClearable={true}
+              // MEMO: https://github.com/JedWatson/react-select/issues/1537#issuecomment-1951609578
+              menuPortalTarget={document.body}
+              // FIXME: Fix it in a non-fixed value way.
+              styles={{
+                control: (provided) => ({
+                  ...provided,
+                  minHeight: "55.981px",
+                }),
+              }}
             />
           )}
         />
@@ -187,8 +195,8 @@ export default function ProfileForm(props: Props) {
           render={({ field }) => (
             <Select
               {...field}
-              options={interestedActivitiesOptions}
-              value={interestedActivitiesOptions.filter((option) =>
+              options={activityOptions}
+              value={activityOptions.filter((option) =>
                 field.value ? field.value.includes(option.value) : false,
               )}
               isMulti
@@ -196,6 +204,13 @@ export default function ProfileForm(props: Props) {
               onChange={(options) =>
                 field.onChange(options.map((option) => option.value))
               }
+              // FIXME: Fix it in a non-fixed value way.
+              styles={{
+                control: (provided) => ({
+                  ...provided,
+                  minHeight: "55.981px",
+                }),
+              }}
             />
           )}
         />
