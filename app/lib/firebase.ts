@@ -14,6 +14,7 @@ import {
   and,
   or,
   collectionGroup,
+  initializeFirestore,
 } from "firebase/firestore";
 import { Activity, User } from "@/app/types/types";
 import {
@@ -33,6 +34,10 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
+initializeFirestore(app, {
+  ignoreUndefinedProperties: true,
+})
 
 const db = getFirestore(app);
 
