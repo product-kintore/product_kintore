@@ -62,8 +62,7 @@ export default function AuthenticatedAppbar(props: Props) {
             variant="h6"
             onClick={props.handleTitleClick}
             sx={{ flexGrow: 1, color: "white", textAlign: "inherit" }}
-          >
-          </Link>
+          ></Link>
         </Toolbar>
       </AppBar>
       <Drawer
