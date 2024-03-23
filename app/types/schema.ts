@@ -1,23 +1,23 @@
 import * as z from "zod";
 
 export const UserSchema = z.object({
-  company: z.string(),
-  role: z.string(),
-  experiencePeriod: z.number(),
-  socialMedia: z
-    .object({
-      twitter: z.string().url().nullable(),
-      note: z.string().url().nullable(),
-    })
-    .nullable(),
-  selfIntroduction: z.string(),
-  communityJoinedBackground: z.object({
-    collectingInformation: z.boolean(),
-    connectingPeople: z.boolean(),
-    other: z.boolean(),
-    descriptionWhenOther: z.string().nullable(),
-  }),
-  communityInterestedActivities: z.array(z.string()).min(1),
+  company: z.optional(z.string()),
+  role: z.optional(z.string()),
+  experiencePeriod: z.optional(z.number()),
+  socialMedia: z.optional(z.object({
+    twitter: z.optional(z.string().url()),
+    note: z.optional(z.string().url()),
+  })),
+  selfIntroduction: z.optional(z.string()),
+  communityJoinedBackground: z.optional(
+    z.object({
+      collectingInformation: z.optional(z.boolean()),
+      connectingPeople: z.optional(z.boolean()),
+      other: z.optional(z.boolean()),
+      descriptionWhenOther: z.optional(z.string()),
+    }),
+  ),
+  communityInterestedActivities: z.optional(z.array(z.string())),
 });
 
 export type UserParams = z.infer<typeof UserSchema>;

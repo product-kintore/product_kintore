@@ -26,25 +26,20 @@ type Props = {
 
 export default function ProfileForm(props: Props) {
   const { user, onSubmit } = props;
-
+  
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<UserParams>({
     defaultValues: {
-      company: user.company || "",
-      role: user.role || "",
-      experiencePeriod: user.experiencePeriod || 0,
-      socialMedia: user.socialMedia || {},
-      selfIntroduction: user.selfIntroduction || "",
-      communityJoinedBackground: user.communityJoinedBackground || {
-        collectingInformation: false,
-        connectingPeople: false,
-        other: false,
-        descriptionWhenOther: null,
-      },
-      communityInterestedActivities: user.communityInterestedActivities || [],
+      company: user.company,
+      role: user.role,
+      experiencePeriod: user.experiencePeriod,
+      socialMedia: user.socialMedia,
+      selfIntroduction: user.selfIntroduction,
+      communityJoinedBackground: user.communityJoinedBackground,
+      communityInterestedActivities: user.communityInterestedActivities,
     },
     resolver: zodResolver(UserSchema),
   });
@@ -60,8 +55,6 @@ export default function ProfileForm(props: Props) {
               label="所属企業"
               placeholder="株式会社XXXX"
               {...field}
-              error={!!errors.company}
-              required
             />
           )}
         />
@@ -75,8 +68,6 @@ export default function ProfileForm(props: Props) {
               label={"所属企業でのロール"}
               placeholder="PM"
               {...field}
-              error={!!errors.role}
-              required
             />
           )}
         />
@@ -91,8 +82,6 @@ export default function ProfileForm(props: Props) {
               placeholder="3"
               type="number"
               {...field}
-              error={!!errors.experiencePeriod}
-              required
               onChange={(e) => field.onChange(parseInt(e.target.value, 10))}
             />
           )}
@@ -107,8 +96,6 @@ export default function ProfileForm(props: Props) {
               label={"自己紹介"}
               multiline
               {...field}
-              error={!!errors.selfIntroduction}
-              required
             />
           )}
         />
@@ -126,7 +113,6 @@ export default function ProfileForm(props: Props) {
                 label={"Twitter"}
                 type="url"
                 {...field}
-                error={!!errors.socialMedia?.twitter}
               />
             )}
           />
@@ -140,7 +126,6 @@ export default function ProfileForm(props: Props) {
                 label={"Note"}
                 type="url"
                 {...field}
-                error={!!errors.socialMedia?.note}
               />
             )}
           />
@@ -204,7 +189,7 @@ export default function ProfileForm(props: Props) {
               {...field}
               options={interestedActivitiesOptions}
               value={interestedActivitiesOptions.filter((option) =>
-                field.value.includes(option.value),
+                field.value ? field.value.includes(option.value) : false,
               )}
               isMulti
               placeholder="興味のある活動"
