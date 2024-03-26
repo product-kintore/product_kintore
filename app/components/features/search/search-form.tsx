@@ -3,24 +3,8 @@ import SearchTextInput from "@/app/components/features/search/search-text-input"
 import SearchSelectInput from "@/app/components/features/search/search-select-input";
 import { Dispatch, SetStateAction } from "react";
 import { UserSearchParams } from "@/app/types/schema";
-
-const roleMenuItems = [
-  undefined,
-  "PM",
-  "Engineer",
-  "Marketing",
-  "Sales",
-  "Cutomer Success",
-  "Other",
-];
-
-const activityMenuItems = [
-  undefined,
-  "輪読会",
-  "図書館LT",
-  "飲み会/交流",
-  "Shuffle Tea Time",
-];
+import { roleOptions } from "@/app/constants/roles";
+import { activityOptions } from "@/app/constants/activities";
 
 type Props = {
   searchParams: UserSearchParams;
@@ -54,8 +38,8 @@ export default function SearchForm(props: Props) {
         <Grid item xs={3}>
           <SearchSelectInput
             props={{
-              menuItems: roleMenuItems,
-              label: "ロール",
+              options: roleOptions,
+              placeholder: "ロール",
               searchParamsLabel: "role",
               searchParams: searchParams,
               setSearchParams: setSearchParams,
@@ -65,8 +49,8 @@ export default function SearchForm(props: Props) {
         <Grid item xs={3}>
           <SearchSelectInput
             props={{
-              menuItems: activityMenuItems,
-              label: "興味ある活動",
+              options: activityOptions,
+              placeholder: "興味ある活動",
               searchParamsLabel: "communityInterestedActivity",
               searchParams: searchParams,
               setSearchParams: setSearchParams,

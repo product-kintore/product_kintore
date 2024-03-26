@@ -1,42 +1,47 @@
 import {
   FormControl,
-  Select,
-  MenuItem,
-  SelectChangeEvent,
-  InputLabel,
 } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 import { UserSearchParams } from "@/app/types/schema";
+import Select from "react-select"; 
 
 type Props = {
-  menuItems: (string | undefined)[];
-  label: string;
+  options: { value: string; label: string }[]
+  placeholder: string;
   searchParamsLabel: string;
   searchParams: UserSearchParams;
   setSearchParams: Dispatch<SetStateAction<UserSearchParams>>;
 };
 
 export default function SearchSelectInput({ props }: { props: Props }) {
-  const { label, menuItems, searchParams, setSearchParams, searchParamsLabel } =
+  const { placeholder, options, searchParams, setSearchParams, searchParamsLabel } =
     props;
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChange = (newValue: string) => {
     setSearchParams({
       ...searchParams,
-      [searchParamsLabel]: event.target.value,
+      [searchParamsLabel]: newValue,
     });
   };
 
   return (
     <FormControl fullWidth>
-      <InputLabel>{label}</InputLabel>
-      <Select label={label} onChange={handleChange}>
-        {menuItems.map((menuItem, index) => (
-          <MenuItem key={index} value={menuItem}>
-            {menuItem}
-          </MenuItem>
-        ))}
-      </Select>
+      <Select
+        options={options} 
+        onChange={(selectedOption) => {
+          if (selectedOption === null) return;
+          handleChange(selectedOption.value);
+        }}
+        placeholder={placeholder}
+        isClearable={true}
+        // FIXME: Fix it in a non-fixed value way.
+        styles={{
+          control: (provided) => ({
+            ...provided,
+            minHeight: "55.981px",
+          }),
+        }}
+      />
     </FormControl>
   );
 }
