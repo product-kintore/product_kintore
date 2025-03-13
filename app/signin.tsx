@@ -1,4 +1,4 @@
-import { Box, Button, Card, Container, Divider, Paper, Typography, useMediaQuery, LinearProgress } from "@mui/material";
+import { Box, Button, Card, Container, Divider, Typography, useMediaQuery, LinearProgress } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useState, useEffect } from "react";
 
