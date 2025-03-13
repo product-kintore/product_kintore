@@ -166,7 +166,7 @@ export default function Signin() {
         </Button>
         
         <Typography variant="body2" color="text.secondary" sx={{ mt: 4, fontSize: "0.85rem" }}>
-          サインインすることで、利用規約とプライバシーポリシーに同意したことになります。
+          サインインすることで、<a href="https://productkintore.notion.site/76c19a5a15ff41288c606bb8aaea5c5d" target="_blank" style={{ color: "#3f51b5", textDecoration: "none" }}>コミュニティガイドライン</a>、利用規約とプライバシーポリシーに同意したことになります。
         </Typography>
       </Card>
       
