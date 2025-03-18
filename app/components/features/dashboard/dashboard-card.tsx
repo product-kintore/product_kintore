@@ -52,7 +52,7 @@ export default function DashboardCard({
   return (
     <StyledCard elevation={elevation} sx={{ minHeight }}>
       <CardContent sx={{ flexGrow: 1 }}>
-        <CardTitle variant="h6" component="h2" color="success.dark">
+        <CardTitle variant="h6" color="success.dark">
           {title}
         </CardTitle>
         <Box>
