@@ -10,9 +10,13 @@ import {
   ListItemIcon,
   ListItemText,
   Link,
+  Typography,
+  Divider,
+  useTheme,
 } from "@mui/material";
-import { Menu } from "@mui/icons-material";
+import { Menu, ChevronLeft } from "@mui/icons-material";
 import { useState } from "react";
+import { styled } from "@mui/material/styles";
 
 type Props = {
   linkList: { text: string; icon: JSX.Element; href: string }[];
@@ -20,8 +24,25 @@ type Props = {
   handleTitleClick: () => void;
 };
 
+const drawerWidth = 240;
+
+const AppBarStyled = styled(AppBar)(({ theme }) => ({
+  backgroundColor: theme.palette.primary.main || "#2e7d32",
+  boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+  zIndex: theme.zIndex.drawer + 1,
+}));
+
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  padding: theme.spacing(0, 1),
+  ...theme.mixins.toolbar,
+  justifyContent: 'flex-end',
+}));
+
 export default function AuthenticatedAppbar(props: Props) {
   const [drawerState, setDrawerState] = useState(false);
+  const theme = useTheme();
 
   const handleDrawerMenuClick = (href: string) => {
     props.handleDrawerMenuClick(href);
@@ -29,13 +50,45 @@ export default function AuthenticatedAppbar(props: Props) {
   };
 
   const drawerList = () => (
-    <Box sx={{ width: 250 }} role="presentation">
+    <Box sx={{ width: drawerWidth }} role="presentation">
+      <DrawerHeader>
+        <Typography 
+          variant="h6" 
+          component="div" 
+          sx={{ 
+            flexGrow: 1, 
+            ml: 2,
+            color: theme.palette.primary.main,
+            fontWeight: 600
+          }}
+        >
+          Product Kintore
+        </Typography>
+        <IconButton onClick={() => setDrawerState(false)}>
+          <ChevronLeft />
+        </IconButton>
+      </DrawerHeader>
+      <Divider />
       <List>
         {props.linkList.map((element, index) => (
           <ListItem key={index} disablePadding>
-            <ListItemButton onClick={() => handleDrawerMenuClick(element.href)}>
-              <ListItemIcon>{element.icon}</ListItemIcon>
-              <ListItemText primary={element.text} />
+            <ListItemButton 
+              onClick={() => handleDrawerMenuClick(element.href)}
+              sx={{
+                '&:hover': {
+                  backgroundColor: 'rgba(46, 125, 50, 0.08)',
+                },
+              }}
+            >
+              <ListItemIcon sx={{ color: theme.palette.primary.main }}>
+                {element.icon}
+              </ListItemIcon>
+              <ListItemText 
+                primary={element.text} 
+                primaryTypographyProps={{ 
+                  fontWeight: 500,
+                }}
+              />
             </ListItemButton>
           </ListItem>
         ))}
@@ -45,7 +98,7 @@ export default function AuthenticatedAppbar(props: Props) {
 
   return (
     <>
-      <AppBar position="fixed">
+      <AppBarStyled position="fixed">
         <Toolbar>
           <IconButton
             size="large"
@@ -61,11 +114,27 @@ export default function AuthenticatedAppbar(props: Props) {
             component="button"
             variant="h6"
             onClick={props.handleTitleClick}
-            sx={{ flexGrow: 1, color: "white", textAlign: "inherit" }}
-          ></Link>
+            sx={{ 
+              flexGrow: 1, 
+              color: "white", 
+              textAlign: "inherit",
+              fontWeight: 600,
+              textDecoration: 'none'
+            }}
+          >
+            Product Kintore
+          </Link>
         </Toolbar>
-      </AppBar>
+      </AppBarStyled>
       <Drawer
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            width: drawerWidth,
+            boxSizing: 'border-box',
+          },
+        }}
         anchor="left"
         open={drawerState}
         onClose={() => setDrawerState(false)}

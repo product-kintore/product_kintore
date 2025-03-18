@@ -2,6 +2,7 @@
 
 import Top from "./top";
 import UserProvider from "@/app/providers/user-provider";
+import ThemeProvider from "@/app/providers/theme-provider";
 import {
   AppbarContainer,
   MainContentContainer,
@@ -9,13 +10,15 @@ import {
 
 export default function Page() {
   return (
-    <UserProvider
-      appbarChildren={<AppbarContainer />}
-      mainChildren={
-        <MainContentContainer>
-          <Top />
-        </MainContentContainer>
-      }
-    />
+    <ThemeProvider>
+      <UserProvider
+        appbarChildren={<AppbarContainer />}
+        mainChildren={
+          <MainContentContainer>
+            <Top />
+          </MainContentContainer>
+        }
+      />
+    </ThemeProvider>
   );
 }
